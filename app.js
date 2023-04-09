@@ -63,7 +63,7 @@ rotateAndZoomToProject(currentProjectIndex);
 
 // Add an Earth texture
 const textureLoader = new THREE.TextureLoader();
-textureLoader.load('https://github.com/DarkCircleStudios/DarkCircleStudios.github.io/blob/50e7f4177e19c0d176712ed3823d501d63c43517/docs/assets/images/earthTexture.png', (texture) => {
+textureLoader.load('https://raw.githubusercontent.com/DarkCircleStudios/DarkCircleStudios.github.io/main/docs/assets/images/earthTexture.png', (texture) => {
   // Update the planet material with the loaded texture
   material.map = texture;
   material.needsUpdate = true;
