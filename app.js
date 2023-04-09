@@ -60,3 +60,50 @@ rotateAndZoomToProject(currentProjectIndex);
 
 // Initialize the view
 rotateAndZoomToProject(currentProjectIndex);
+
+// Add an Earth texture
+const textureLoader = new THREE.TextureLoader();
+textureLoader.load('https://raw.githubusercontent.com/tbranyen/earth-3d/master/texture.jpg', (texture) => {
+  // Update the planet material with the loaded texture
+  material.map = texture;
+  material.needsUpdate = true;
+});
+
+// ...
+
+// Modify the rotateAndZoomToProject function to create a Google Earth-like zoom effect
+function rotateAndZoomToProject(index) {
+  const newPosition = new THREE.Vector3(
+    projectSpots[index].x * 3,
+    projectSpots[index].y * 3,
+    projectSpots[index].z * 3
+  );
+
+  const tweenDuration = 2000; // Duration in milliseconds
+
+  // Animate the camera position
+  const positionTween = new TWEEN.Tween(camera.position)
+    .to(newPosition, tweenDuration)
+    .easing(TWEEN.Easing.Quadratic.InOut)
+    .onUpdate(() => {
+      camera.lookAt(planet.position);
+    })
+    .start();
+
+  // Rotate the planet while moving the camera
+  const rotationTween = new TWEEN.Tween(planet.rotation)
+    .to({ y: planet.rotation.y + (Math.PI / 5) }, tweenDuration)
+    .easing(TWEEN.Easing.Quadratic.InOut)
+    .start();
+}
+
+// ...
+
+// Update the animate function to include TWEEN animations
+function animate() {
+  requestAnimationFrame(animate);
+  TWEEN.update();
+  renderer.render(scene, camera);
+}
+
+// Load the TWEEN library in your index.html

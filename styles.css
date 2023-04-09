@@ -1,27 +1,45 @@
+/* Add a Google Font */
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
+  background-color: #222;
   margin: 0;
   padding: 0;
+  overflow-x: hidden; /* Hide horizontal scrollbar if the planet overflows */
 }
 
 header {
-  background-color: #333;
+  background-color: #444;
   color: white;
   padding: 1rem;
   text-align: center;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 1s, transform 1s;
 }
 
 nav {
-  /* Add your desired styles for the navigation bar */
+  /* Add desired styles for the navigation bar */
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 1s, transform 1s;
 }
 
-#planet-container {
-  width: 100%;
-  height: calc(100vh - 2rem); /* Subtract header height */
-  position: relative;
+/* Add a keyframe animation for the arrow buttons */
+@keyframes arrow-fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 button {
+  /* Updated styles for arrow buttons */
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -30,12 +48,16 @@ button {
   border: none;
   color: white;
   cursor: pointer;
+  opacity: 0;
+  animation: arrow-fade-in 1s forwards;
 }
 
 #arrow-left {
   left: 1rem;
+  animation-delay: 0.5s;
 }
 
 #arrow-right {
   right: 1rem;
+  animation-delay: 0.75s;
 }
